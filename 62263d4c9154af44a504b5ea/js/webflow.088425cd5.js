@@ -99,7 +99,6 @@
   return it && it.Math == Math && it;
 };
 
-
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 module.exports =
   // eslint-disable-next-line es/no-global-this -- safe
@@ -20690,44 +20689,52 @@ Webflow.define('tabs', module.exports = function ($) {
 Webflow.require('ix2').init(
 {"events":{"e":{"id":"e","name":"","animationType":"custom","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-2"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"186ecda1-2ceb-0acb-19f3-b04daa9a1a21","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"186ecda1-2ceb-0acb-19f3-b04daa9a1a21","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1647112962119},"e-3":{"id":"e-3","name":"","animationType":"custom","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-2","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-4"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"56df7c21-c68f-a0fe-7deb-c479ed312abb","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"56df7c21-c68f-a0fe-7deb-c479ed312abb","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1647112976825},"e-6":{"id":"e-6","name":"","animationType":"custom","eventTypeId":"PAGE_FINISH","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-3","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-5"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"62263d4c9154af3d4204b5eb","appliesTo":"PAGE","styleBlockIds":[]},"targets":[{"id":"62263d4c9154af3d4204b5eb","appliesTo":"PAGE","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1651169501671}},"actionLists":{"a":{"id":"a","title":"Show \"Close\"","actionItemGroups":[{"actionItems":[{"id":"a-n-3","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"useEventTarget":"SIBLINGS","selector":".menu-text","selectorGuids":["50c33425-8343-860d-ad62-473885217b4d"]},"value":"none"}}]},{"actionItems":[{"id":"a-n-2","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"useEventTarget":true,"id":"186ecda1-2ceb-0acb-19f3-b04daa9a1a21"},"value":"none"}},{"id":"a-n","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"useEventTarget":"SIBLINGS","selector":".menu-text","selectorGuids":["50c33425-8343-860d-ad62-473885217b4d"]},"value":"block"}}]}],"useFirstGroupAsInitialState":true,"createdOn":1647105031082},"a-2":{"id":"a-2","title":"Show \"Menu\"","actionItemGroups":[{"actionItems":[{"id":"a-2-n","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"useEventTarget":"SIBLINGS","selector":".menu-text","selectorGuids":["50c33425-8343-860d-ad62-473885217b4d"]},"value":"block"}},{"id":"a-2-n-2","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"useEventTarget":true,"id":"56df7c21-c68f-a0fe-7deb-c479ed312abb"},"value":"none"}}]}],"useFirstGroupAsInitialState":false,"createdOn":1647105081695},"a-3":{"id":"a-3","title":"Page Load Animation","actionItemGroups":[{"actionItems":[{"id":"a-3-n","actionTypeId":"STYLE_SIZE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"62263d4c9154af3d4204b5eb|4855a2b2-d7cb-03f3-a696-f57d1bc1f62e"},"heightValue":0,"widthUnit":"PX","heightUnit":"px","locked":false}},{"id":"a-3-n-3","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"62263d4c9154af3d4204b5eb|bcc5fd7c-72e1-8be8-3d5e-aab64c8c2569"},"yValue":100,"xUnit":"PX","yUnit":"%","zUnit":"PX"}},{"id":"a-3-n-5","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"62263d4c9154af3d4204b5eb|31fa58b8-6ee1-37e8-4280-582f8c70cdd6"},"yValue":-100,"xUnit":"PX","yUnit":"%","zUnit":"PX"}},{"id":"a-3-n-7","actionTypeId":"STYLE_SIZE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"62263d4c9154af3d4204b5eb|2c8884dd-87e0-1403-63fa-8a4087adcf34"},"widthValue":0,"widthUnit":"%","heightUnit":"PX","locked":false}}]},{"actionItems":[{"id":"a-3-n-2","actionTypeId":"STYLE_SIZE","config":{"delay":0,"easing":"inOutCubic","duration":1000,"target":{"id":"62263d4c9154af3d4204b5eb|4855a2b2-d7cb-03f3-a696-f57d1bc1f62e"},"widthUnit":"PX","heightUnit":"AUTO","locked":false}}]},{"actionItems":[{"id":"a-3-n-4","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"outCubic","duration":800,"target":{"id":"62263d4c9154af3d4204b5eb|bcc5fd7c-72e1-8be8-3d5e-aab64c8c2569"},"yValue":0,"xUnit":"PX","yUnit":"px","zUnit":"PX"}},{"id":"a-3-n-6","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"outCubic","duration":1000,"target":{"id":"62263d4c9154af3d4204b5eb|31fa58b8-6ee1-37e8-4280-582f8c70cdd6"},"yValue":0,"xUnit":"PX","yUnit":"px","zUnit":"PX"}},{"id":"a-3-n-8","actionTypeId":"STYLE_SIZE","config":{"delay":0,"easing":"inOutCubic","duration":2000,"target":{"id":"62263d4c9154af3d4204b5eb|2c8884dd-87e0-1403-63fa-8a4087adcf34"},"widthValue":100,"widthUnit":"%","heightUnit":"PX","locked":false}}]}],"useFirstGroupAsInitialState":true,"createdOn":1651169508744}},"site":{"mediaQueries":[{"key":"main","min":992,"max":10000},{"key":"medium","min":768,"max":991},{"key":"small","min":480,"max":767},{"key":"tiny","min":0,"max":479}]}}
 );
+// меню 1
 // Функция для блокировки скролла
 function disableScroll() {
   // Сохраняем текущую позицию скролла
   const scrollY = window.scrollY || document.documentElement.scrollTop;
+  
+  // Блокируем скролл для большинства устройств
+  document.body.style.overflow = 'hidden';
   document.body.style.position = 'fixed';
   document.body.style.top = `-${scrollY}px`;
   document.body.style.width = '100%';
-  document.body.classList.add('body-no-scroll');
   
   // Сохраняем позицию скролла для восстановления
   document.body.dataset.scrollY = scrollY;
+  
+  // Добавляем класс для дополнительного стилирования
+  document.body.classList.add('no-scroll');
 }
 
 // Функция для разблокировки скролла
 function enableScroll() {
+  // Восстанавливаем стандартные стили
+  document.body.style.overflow = '';
   document.body.style.position = '';
   document.body.style.top = '';
   document.body.style.width = '';
-  document.body.classList.remove('body-no-scroll');
+  document.body.classList.remove('no-scroll');
   
   // Восстанавливаем позицию скролла
   const scrollY = document.body.dataset.scrollY;
-  window.scrollTo(0, parseInt(scrollY || '0'));
+  if (scrollY) {
+    window.scrollTo(0, parseInt(scrollY));
+  }
 }
 
-// Функция для открытия модального окна 1
+// Функция для открытия модального окна
 function openModal() {
   // Проверяем ширину экрана
   if (window.innerWidth <= 479) {
     // Для мобильных устройств
     document.getElementById('successModalMini').style.display = 'flex';
-    document.getElementById('successModalMini').style.display = 'flex';
-disableScroll();
   } else {
     // Для десктопов
     document.getElementById('successModal').style.display = 'flex';
   }
-  document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
+  disableScroll(); // Блокируем прокрутку фона
 }
 
 // Функция для закрытия модального окна
@@ -20735,11 +20742,29 @@ function closeModal() {
   // Закрываем оба модальных окна на всякий случай
   document.getElementById('successModal').style.display = 'none';
   document.getElementById('successModalMini').style.display = 'none';
-  document.body.style.overflow = 'auto'; // Восстанавливаем прокрутку
-  document.getElementById('modalCloseMini').addEventListener('click', function() {
-  document.getElementById('successModalMini').style.display = 'none';
-  enableScroll();
-});
+  enableScroll(); // Восстанавливаем прокрутку
+}
+
+// Дополнительный фикс для iOS
+function setupIOSScrollFix() {
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    // Предотвращаем скролл при касании внутри модального окна
+    document.addEventListener('touchmove', function(e) {
+      const modals = [
+        document.getElementById('successModal'),
+        document.getElementById('successModalMini')
+      ];
+      
+      const isModalOpen = modals.some(modal => 
+        modal && modal.style.display === 'flex'
+      );
+      
+      // Если модальное окно открыто и пользователь пытается скроллить за его пределами
+      if (isModalOpen && !e.target.closest('.modal-menu_container')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  }
 }
 
 // Обработчик для кнопки отправки формы
@@ -20749,6 +20774,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const closeButtonMini = document.getElementById('modalCloseMini');
   const modalOverlay = document.getElementById('successModal');
   const modalOverlayMini = document.getElementById('successModalMini');
+
+  // Настраиваем фикс для iOS
+  setupIOSScrollFix();
 
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
@@ -20768,7 +20796,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Закрытие по крестику мини модального окна
   if (closeButtonMini) {
     closeButtonMini.addEventListener('click', closeModal);
-    
   }
 
   // Закрытие по клику вне основного модального окна
@@ -20815,7 +20842,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-
 // меню 2
 document.addEventListener('DOMContentLoaded', function() {
   const phoneIcon = document.getElementById('phone-icon-svg');
@@ -20826,29 +20852,25 @@ document.addEventListener('DOMContentLoaded', function() {
   function openModal() {
     modalMenu.style.display = 'flex';
     phoneIcon.classList.add('hidden');
+    disableScroll(); // Блокируем скролл при открытии
   }
 
   function closeModal() {
     modalMenu.style.display = 'none';
     phoneIcon.classList.remove('hidden');
+    enableScroll(); // Разблокируем скролл при закрытии
   }
 
   // Обработчик для открытия меню
   openMenuButton.addEventListener('click', function(e) {
     e.preventDefault();
     openModal();
-    document.getElementById('successModalMini').style.display = 'flex';
-disableScroll();
   });
 
   // Обработчик для закрытия
   closeMenuButton.addEventListener('click', function(e) {
     e.preventDefault();
     closeModal();
-    document.getElementById('modalCloseMini').addEventListener('click', function() {
-  document.getElementById('successModalMini').style.display = 'none';
-  enableScroll();
-});
   });
 
   // Закрытие при клике вне модального окна
@@ -20857,17 +20879,72 @@ disableScroll();
       closeModal();
     }
   });
+
+  // Закрытие по клавише Esc
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modalMenu.style.display === 'flex') {
+      closeModal();
+    }
+  });
 });
-// Дополнительный фикс для iOS
-function iosScrollFix() {
+
+// Функции для блокировки/разблокировки скролла (добавьте если их еще нет)
+function disableScroll() {
+  // Сохраняем текущую позицию скролла
+  const scrollY = window.scrollY || document.documentElement.scrollTop;
+  
+  // Блокируем скролл для большинства устройств
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = '100%';
+  
+  // Сохраняем позицию скролла для восстановления
+  document.body.dataset.scrollY = scrollY;
+  
+  // Добавляем класс для дополнительного стилирования
+  document.body.classList.add('no-scroll');
+}
+
+function enableScroll() {
+  // Восстанавливаем стандартные стили
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  document.body.classList.remove('no-scroll');
+  
+  // Восстанавливаем позицию скролла
+  const scrollY = document.body.dataset.scrollY;
+  if (scrollY) {
+    window.scrollTo(0, parseInt(scrollY));
+  }
+}
+
+// Дополнительный фикс для iOS (добавьте если его еще нет)
+function setupIOSScrollFix() {
   if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    // Предотвращаем скролл при касании за пределами модального окна
     document.addEventListener('touchmove', function(e) {
-      if (document.body.classList.contains('body-no-scroll')) {
+      const modals = [
+        document.getElementById('successModal'),
+        document.getElementById('successModalMini'),
+        document.getElementById('successModalMenu')
+      ];
+      
+      const isModalOpen = modals.some(modal => 
+        modal && modal.style.display === 'flex'
+      );
+      
+      // Если модальное окно открыто и пользователь пытается скроллить за его пределами
+      if (isModalOpen && !e.target.closest('.modal-menu_container')) {
         e.preventDefault();
       }
     }, { passive: false });
   }
 }
 
-// Вызовите эту функцию при загрузке страницы
-iosScrollFix();
+// Вызываем фикс для iOS при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+  setupIOSScrollFix();
+});

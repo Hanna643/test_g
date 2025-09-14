@@ -23,11 +23,15 @@
   grid-row-gap: 16px;
   grid-column-gap: 16px;
 }
-.body-no-scroll {
+.no-scroll {
   overflow: hidden;
   position: fixed;
   width: 100%;
   height: 100%;
+}
+.modal-overlayMini {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
 }
 
 .w-form-formradioinput--inputType-custom {
