@@ -1180,7 +1180,7 @@ figcaption {
   padding: 0 10px;
 }
 .modal-menu_container {
-  margin: 56px 0;
+  margin-top: 56px;
   display: flex;
   flex-direction: column;
 }
@@ -1225,7 +1225,7 @@ figcaption {
   padding: 0 10px;
 }
 .modal-containerMini {
-  margin: 73px 0;
+  margin-top: 73px;
 }
 .modal-textMini{
   font-size: 16px;
