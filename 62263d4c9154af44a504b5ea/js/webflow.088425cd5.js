@@ -98,6 +98,14 @@
 /* WEBPACK VAR INJECTION */(function(global) {var check = function (it) {
   return it && it.Math == Math && it;
 };
+// Фикс для iOS viewport
+function setVH() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVH();
+window.addEventListener('resize', setVH);
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 module.exports =

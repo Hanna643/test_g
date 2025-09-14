@@ -23,6 +23,10 @@
   grid-row-gap: 16px;
   grid-column-gap: 16px;
 }
+.modal-overlayMini {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
 
 .w-form-formradioinput--inputType-custom {
   border-top-width: 1px;
