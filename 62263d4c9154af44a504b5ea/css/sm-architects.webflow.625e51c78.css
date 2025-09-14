@@ -1067,6 +1067,10 @@ figcaption {
   background-size: cover;
 }
 /* Стили для модального окна */
+.modal-overlayMini, .modal-menu, .modal-overlay {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
 .modal-overlay {
   display: none;
   position: fixed;
