@@ -20752,7 +20752,9 @@ function setupIOSScrollFix() {
     document.addEventListener('touchmove', function(e) {
       const modals = [
         document.getElementById('successModal'),
-        document.getElementById('successModalMini')
+        document.getElementById('successModalMini'),
+        document.getElementById('successModalMenu'),
+        document.getElementById('projectModal')
       ];
       
       const isModalOpen = modals.some(modal => 
@@ -20888,63 +20890,147 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Функции для блокировки/разблокировки скролла (добавьте если их еще нет)
-function disableScroll() {
-  // Сохраняем текущую позицию скролла
-  const scrollY = window.scrollY || document.documentElement.scrollTop;
-  
-  // Блокируем скролл для большинства устройств
-  document.body.style.overflow = 'hidden';
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${scrollY}px`;
-  document.body.style.width = '100%';
-  
-  // Сохраняем позицию скролла для восстановления
-  document.body.dataset.scrollY = scrollY;
-  
-  // Добавляем класс для дополнительного стилирования
-  document.body.classList.add('no-scroll');
-}
-
-function enableScroll() {
-  // Восстанавливаем стандартные стили
-  document.body.style.overflow = '';
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
-  document.body.classList.remove('no-scroll');
-  
-  // Восстанавливаем позицию скролла
-  const scrollY = document.body.dataset.scrollY;
-  if (scrollY) {
-    window.scrollTo(0, parseInt(scrollY));
-  }
-}
-
-// Дополнительный фикс для iOS (добавьте если его еще нет)
-function setupIOSScrollFix() {
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-    // Предотвращаем скролл при касании за пределами модального окна
-    document.addEventListener('touchmove', function(e) {
-      const modals = [
-        document.getElementById('successModal'),
-        document.getElementById('successModalMini'),
-        document.getElementById('successModalMenu')
-      ];
-      
-      const isModalOpen = modals.some(modal => 
-        modal && modal.style.display === 'flex'
-      );
-      
-      // Если модальное окно открыто и пользователь пытается скроллить за его пределами
-      if (isModalOpen && !e.target.closest('.modal-menu_container')) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-  }
-}
-
 // Вызываем фикс для iOS при загрузке
 document.addEventListener('DOMContentLoaded', function() {
   setupIOSScrollFix();
+});
+
+
+// окно с формой
+document.addEventListener('DOMContentLoaded', function() {
+  // Получаем элементы DOM
+  const projectModal = document.getElementById('projectModal');
+  const closeModalBtn = document.getElementById('closeprojectModal');
+
+  // Сохраняем оригинальный текст кнопки из исходной формы
+  const originalForm = document.querySelector('.w-form');
+  const originalButton = originalForm.querySelector('.button');
+  const originalButtonText = originalButton ? originalButton.value : '';
+
+  // Функция для проверки мобильного разрешения
+  function isMobileWidth() {
+    return window.matchMedia('(max-width: 479px)').matches;
+  }
+
+  // Функция для клонирования формы в модальное окно
+  function cloneFormToModal() {
+    // Клонируем форму
+    const clonedForm = originalForm.cloneNode(true);
+
+    // Находим контейнер в модальном окне и вставляем клон
+    const modalFormContainer = document.getElementById('modal-form-container');
+    modalFormContainer.innerHTML = '';
+    modalFormContainer.appendChild(clonedForm);
+  }
+
+  // Функция для применения стилей к элементам в модальном окне
+  function applyModalStyles() {
+    // Находим элементы внутри модального окна
+    const modalCheckboxes = document.querySelectorAll('#modal-form-container .checkbox');
+    const modalRadioButtons = document.querySelectorAll('#modal-form-container .radio-button');
+    const modalButtons = document.querySelectorAll('#modal-form-container .button');
+    const modalForm = document.querySelector('#modal-form-container .w-form');
+
+    // Удаляем border-style у checkbox и radio-button
+    modalCheckboxes.forEach(checkbox => {
+      checkbox.style.borderStyle = 'solid';
+    });
+
+    modalRadioButtons.forEach(radio => {
+      radio.style.borderStyle = 'solid';
+    });
+
+    // Изменяем стили кнопки
+    modalButtons.forEach(button => {
+      button.style.backgroundColor = '#000';
+      button.style.color = '#fff';
+
+      // Добавляем обработчики для hover-эффекта
+      button.addEventListener('mouseenter', function() {
+        this.style.backgroundColor = '#fff';
+        this.style.color = '#000';
+      });
+
+      button.addEventListener('mouseleave', function() {
+        this.style.backgroundColor = '#000';
+        this.style.color = '#fff';
+      });
+
+      // Применяем мобильные стили если нужно
+      if (isMobileWidth()) {
+        button.style.width = '100%';
+        button.style.fontSize = '16px';
+        // Меняем текст кнопки через value
+        button.value = 'Обсудить проект';
+      } else {
+        // Восстанавливаем оригинальный текст
+        button.value = originalButtonText;
+        // Убираем мобильные стили
+        button.style.width = '';
+        button.style.fontSize = '';
+      }
+    });
+
+    // Применяем стили к форме для мобильных
+    if (isMobileWidth() && modalForm) {
+      modalForm.style.fontSize = '22px';
+    } else if (modalForm) {
+      // Восстанавливаем стандартный размер шрифта
+      modalForm.style.fontSize = '';
+    }
+  }
+
+  // Функция для открытия модального окна
+  function openModal() {
+    // Клонируем форму перед открытием модального окна
+    cloneFormToModal();
+    // Применяем стили к элементам в модальном окне
+    applyModalStyles();
+    // Показываем модальное окно
+    projectModal.style.display = 'flex';
+    // Блокируем прокрутку фонового контента
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Функция для закрытия модального окна
+  function closeModal() {
+    // Скрываем модальное окно
+    projectModal.style.display = 'none';
+    // Восстанавливаем прокрутку фонового контента
+    document.body.style.overflow = 'auto';
+  }
+
+  // Обработчик для кнопок, открывающих модальное окно
+  const projectModalButtons = document.querySelectorAll('.project-modal');
+  projectModalButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  // Обработчик для кнопки закрытия модального окна
+  closeModalBtn.addEventListener('click', closeModal);
+
+  // Закрытие модального окна при клике вне его области
+  projectModal.addEventListener('click', function(e) {
+    if (e.target === projectModal) {
+      closeModal();
+    }
+  });
+
+  // Закрытие модального окна при нажатии клавиши Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && projectModal.style.display === 'flex') {
+      closeModal();
+    }
+  });
+
+  // Обработчик изменения размера окна
+  window.addEventListener('resize', function() {
+    // Если модальное окно открыто, обновляем стили
+    if (projectModal.style.display === 'flex') {
+      applyModalStyles();
+    }
+  });
 });

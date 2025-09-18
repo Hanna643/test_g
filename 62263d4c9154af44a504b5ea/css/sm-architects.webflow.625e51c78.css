@@ -75,6 +75,7 @@
   text-align: start;
   margin-bottom: 5px;
   margin-top: 45px;
+  max-width: 721px;
 }
 
 .w-checkbox::before {
@@ -136,6 +137,7 @@
   font-weight: 400;
   font-size: 20px;
   color: #0000007F;
+  letter-spacing: -0.2px;
 }
 .w-checkbox-input--inputType-custom.w--redirected-checked {
   background-color: #3898ec;
@@ -247,7 +249,12 @@ img {
   max-width: 100%;
   min-width: 100%;
 }
-
+.w-form {
+  font-size: 29px;
+}
+.w-form .button {
+  font-size: 24px;
+}
 label {
   display: block;
   margin-bottom: 5px;
@@ -382,7 +389,7 @@ figcaption {
 .button {
   margin-right: 15px;
   margin-bottom: 15px;
-  padding: 7px 15px;
+  padding: 10px 15px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
@@ -578,7 +585,7 @@ figcaption {
 .radio-button {
   width: 20px;
   height: 20px;
-  margin-top: 3px;
+  margin-top: 7px;
   margin-right: 12px;
   border-style: none;
   background-color: #fff;
@@ -598,7 +605,7 @@ figcaption {
 .checkbox {
   width: 20px;
   height: 20px;
-  margin-top: 2px;
+  margin-top: 10px;
   margin-right: 12px;
   border-style: none;
   border-radius: 3px;
@@ -1077,11 +1084,11 @@ figcaption {
   background-size: cover;
 }
 /* Стили для модального окна */
-.modal-overlayMini, .modal-menu, .modal-overlay {
+.modal-overlayMini, .modal-menu, .modal-overlay, .modalProject {
   min-height: 100vh;
   min-height: -webkit-fill-available;
 }
-.modal-overlay {
+.modal-overlay, .modalProject {
   display: none;
   position: fixed;
   top: 0;
@@ -1092,15 +1099,14 @@ figcaption {
   z-index: 1000;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(5px);
+  /*backdrop-filter: blur(5px);*/
 }
 
 .modal-container {
   position: relative;
-  background: #FFFFFF;
+  background: #EAEAEA;
   border-radius: 20px;
   padding: 6vh 8vw 7vh 8vw; /* Адаптивные отступы относительно размера экрана */
-  /*padding: 100px 130px 140px 163px;*/
   max-width: min(900px, 95vw); /* Не более 900px или 90% ширины экрана */
   max-height: min(800px, 95vh); /* Не более 800px или 85% высоты экрана */
   width: auto;
@@ -1109,6 +1115,7 @@ figcaption {
   overflow: auto; /* Добавляем прокрутку при необходимости */
   margin: 20px; /* Гарантированный отступ от краев экрана */
 }
+
 .modal-close {
   position: absolute;
   top: 24px;
@@ -1128,9 +1135,6 @@ figcaption {
 }
 
 .modal-title {
-  /*font-size: 59px;*/
-  /*margin-bottom: 13px;*/
-  /*font-weight: 500;*/
   font-size: min(59px, 7vh);
   margin-bottom: min(13px, 2vh);
   font-weight: 500;
@@ -1245,6 +1249,26 @@ figcaption {
 .modalPhone-mini {
   font-weight: 500;
   padding-top: 10px;
+}
+.containerProject {
+  background: #FFFFFF;
+  padding: 7vh 5vw 2vh 5vw; /* Адаптивные отступы относительно размера экрана */
+}
+.modalProject-text {
+  font-size: 40px;
+  font-weight: 400;
+  margin-bottom: 12vh;
+  line-height: 1;
+}
+
+@media screen and (max-width: 1800px) {
+  .containerProject {
+    padding: 4vh 6vw 2vh 6vw;
+  }
+.modalProject-text {
+  font-size: 35px;
+  margin-bottom: 4vh;
+}
 }
 @media screen and (max-width: 1100px) {
 .tel {
@@ -1371,13 +1395,19 @@ figcaption {
   .next.hide-desktop {
     display: block;
   }
-  .modal-container {
+  .modal-container, .containerProject {
     padding: 5vh 6vw 6vh 6vw;
     max-width: 92vw;
     max-height: 88vh;
     margin: 15px;
   }
-
+  .containerProject {
+    padding: 4vh 6vw 4vh 6vw;
+  }
+  .modalProject-text {
+    font-size: 35px;
+    margin-bottom: 10vh;
+  }
   .modal-title {
     font-size: min(45px, 6vh);
   }
@@ -1563,6 +1593,12 @@ figcaption {
   .nav-comma {
     display: none;
   }
+  .radio-button {
+    margin-top: 3px;
+  }
+  .checkbox {
+    margin-top: 5px;
+  }
 
   .project-journal-main-image {
     margin-bottom: 5px;
@@ -1647,6 +1683,13 @@ figcaption {
   .modal-links {
     gap: min(15px, 2vh);
   }
+  .containerProject {
+    padding: 6vh 6vw 2vh 6vw;
+  }
+  .modalProject-text {
+    font-size: 32px;
+    margin-bottom: 9vh;
+  }
 }
 
 @media screen and (max-width: 479px) {
@@ -1701,7 +1744,9 @@ figcaption {
     margin-bottom: 7px;
     font-size: 18px;
   }
-
+  .page-wrapper {
+    height: 100vh;
+  }
   .text-input.password {
     font-size: 35px;
   }
@@ -1730,7 +1775,7 @@ figcaption {
   .big-text {
     font-size: 35px;
   }
-  .modal-overlay {
+  .modal-overlay, .modalProject {
     background-color: #F5F5F5;
     align-items: start;
     justify-content: start;
@@ -1788,6 +1833,12 @@ gap: 10px;
   .modal-menu {
     align-items: start;
     justify-content: start;
+  }
+  .modalProject-text {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 8vh;
+    max-width: 312px;
   }
 }
 
