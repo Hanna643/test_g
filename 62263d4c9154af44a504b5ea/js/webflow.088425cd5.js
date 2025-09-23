@@ -20904,7 +20904,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Сохраняем оригинальный текст кнопки из исходной формы
   const originalForm = document.querySelector('.w-form');
-  const originalButton = originalForm.querySelector('.button');
+  const originalButton = originalForm ? originalForm.querySelector('.button') : null;
   const originalButtonText = originalButton ? originalButton.value : '';
 
   // Функция для проверки мобильного разрешения
@@ -20917,10 +20917,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Клонируем форму
     const clonedForm = originalForm.cloneNode(true);
 
+    // Удаляем ID у клонированной формы, чтобы избежать дублирования
+    clonedForm.removeAttribute('id');
+
     // Находим контейнер в модальном окне и вставляем клон
     const modalFormContainer = document.getElementById('modal-form-container');
     modalFormContainer.innerHTML = '';
     modalFormContainer.appendChild(clonedForm);
+
+    // Добавляем обработчик отправки формы
+    const form = clonedForm.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        closeModal(); // Закрываем модальное окно с формой
+
+        // Открываем модальное окно успеха
+        if (typeof openModal === 'function') {
+          openModal();
+        } else {
+          // Если функция openModal не определена, используем альтернативный вариант
+          if (isMobileWidth()) {
+            document.getElementById('successModalMini').style.display = 'flex';
+          } else {
+            document.getElementById('successModal').style.display = 'flex';
+          }
+          disableScroll();
+        }
+      });
+    }
   }
 
   // Функция для применения стилей к элементам в модальном окне
@@ -20941,35 +20966,37 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Изменяем стили кнопки
-    modalButtons.forEach(button => {
-      button.style.backgroundColor = '#000';
-      button.style.color = '#fff';
+    if (modalButtons) {
+      modalButtons.forEach(button => {
+        button.style.backgroundColor = '#000';
+        button.style.color = '#fff';
 
-      // Добавляем обработчики для hover-эффекта
-      button.addEventListener('mouseenter', function() {
-        this.style.backgroundColor = '#fff';
-        this.style.color = '#000';
+        // Добавляем обработчики для hover-эффекта
+        button.addEventListener('mouseenter', function() {
+          this.style.backgroundColor = '#fff';
+          this.style.color = '#000';
+        });
+
+        button.addEventListener('mouseleave', function() {
+          this.style.backgroundColor = '#000';
+          this.style.color = '#fff';
+        });
+
+        // Применяем мобильные стили если нужно
+        if (isMobileWidth()) {
+          button.style.width = '100%';
+          button.style.fontSize = '16px';
+          // Меняем текст кнопки через value
+          button.value = 'Обсудить проект';
+        } else {
+          // Восстанавливаем оригинальный текст
+          button.value = originalButtonText;
+          // Убираем мобильные стили
+          button.style.width = '';
+          button.style.fontSize = '';
+        }
       });
-
-      button.addEventListener('mouseleave', function() {
-        this.style.backgroundColor = '#000';
-        this.style.color = '#fff';
-      });
-
-      // Применяем мобильные стили если нужно
-      if (isMobileWidth()) {
-        button.style.width = '100%';
-        button.style.fontSize = '16px';
-        // Меняем текст кнопки через value
-        button.value = 'Обсудить проект';
-      } else {
-        // Восстанавливаем оригинальный текст
-        button.value = originalButtonText;
-        // Убираем мобильные стили
-        button.style.width = '';
-        button.style.fontSize = '';
-      }
-    });
+    }
 
     // Применяем стили к форме для мобильных
     if (isMobileWidth() && modalForm) {
@@ -20980,8 +21007,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Функция для открытия модального окна
-  function openModal() {
+  // Функция для открытия модального окна с формой
+  function openFormModal() {
     // Клонируем форму перед открытием модального окна
     cloneFormToModal();
     // Применяем стили к элементам в модальном окне
@@ -20992,7 +21019,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflow = 'hidden';
   }
 
-  // Функция для закрытия модального окна
+  // Функция для закрытия модального окна с формой
   function closeModal() {
     // Скрываем модальное окно
     projectModal.style.display = 'none';
@@ -21000,24 +21027,28 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflow = 'auto';
   }
 
-  // Обработчик для кнопок, открывающих модальное окно
+  // Обработчик для кнопок, открывающих модальное окно с формой
   const projectModalButtons = document.querySelectorAll('.project-modal');
   projectModalButtons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
-      openModal();
+      openFormModal();
     });
   });
 
   // Обработчик для кнопки закрытия модального окна
-  closeModalBtn.addEventListener('click', closeModal);
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
+  }
 
   // Закрытие модального окна при клике вне его области
-  projectModal.addEventListener('click', function(e) {
-    if (e.target === projectModal) {
-      closeModal();
-    }
-  });
+  if (projectModal) {
+    projectModal.addEventListener('click', function(e) {
+      if (e.target === projectModal) {
+        closeModal();
+      }
+    });
+  }
 
   // Закрытие модального окна при нажатии клавиши Escape
   document.addEventListener('keydown', function(e) {
@@ -21031,6 +21062,161 @@ document.addEventListener('DOMContentLoaded', function() {
     // Если модальное окно открыто, обновляем стили
     if (projectModal.style.display === 'flex') {
       applyModalStyles();
+    }
+  });
+});
+
+// Функция для блокировки скролла
+function disableScroll() {
+  // Сохраняем текущую позицию скролла
+  const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+  // Блокируем скролл для большинства устройств
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = '100%';
+
+  // Сохраняем позицию скролла для восстановления
+  document.body.dataset.scrollY = scrollY;
+
+  // Добавляем класс для дополнительного стилирования
+  document.body.classList.add('no-scroll');
+}
+
+// Функция для разблокировки скролла
+function enableScroll() {
+  // Восстанавливаем стандартные стили
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  document.body.classList.remove('no-scroll');
+
+  // Восстанавливаем позицию скролла
+  const scrollY = document.body.dataset.scrollY;
+  if (scrollY) {
+    window.scrollTo(0, parseInt(scrollY));
+  }
+}
+
+// Функция для открытия модального окна успеха
+function openModal() {
+  // Проверяем ширину экрана
+  if (window.innerWidth <= 479) {
+    // Для мобильных устройств
+    document.getElementById('successModalMini').style.display = 'flex';
+  } else {
+    // Для десктопов
+    document.getElementById('successModal').style.display = 'flex';
+  }
+  disableScroll(); // Блокируем прокрутку фона
+}
+
+// Функция для закрытия модального окна успеха
+function closeModal() {
+  // Закрываем оба модальных окна на всякий случай
+  document.getElementById('successModal').style.display = 'none';
+  document.getElementById('successModalMini').style.display = 'none';
+  enableScroll(); // Восстанавливаем прокрутку
+}
+
+// Дополнительный фикс для iOS
+function setupIOSScrollFix() {
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    // Предотвращаем скролл при касании внутри модального окна
+    document.addEventListener('touchmove', function(e) {
+      const modals = [
+        document.getElementById('successModal'),
+        document.getElementById('successModalMini'),
+        document.getElementById('successModalMenu'),
+        document.getElementById('projectModal')
+      ];
+
+      const isModalOpen = modals.some(modal =>
+          modal && modal.style.display === 'flex'
+      );
+
+      // Если модальное окно открыто и пользователь пытается скроллить за его пределами
+      if (isModalOpen && !e.target.closest('.modal-menu_container')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  }
+}
+
+// Обработчик для кнопки отправки формы
+document.addEventListener('DOMContentLoaded', function() {
+  const contactForm = document.getElementById('Contact-form');
+  const closeButton = document.getElementById('closeModal');
+  const closeButtonMini = document.getElementById('modalCloseMini');
+  const modalOverlay = document.getElementById('successModal');
+  const modalOverlayMini = document.getElementById('successModalMini');
+
+  // Настраиваем фикс для iOS
+  setupIOSScrollFix();
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault(); // Предотвращаем отправку формы
+      openModal(); // Открываем модальное окно успеха
+
+      // Здесь можно добавить код для реальной отправки формы
+      // например, с помощью Fetch API или XMLHttpRequest
+    });
+  }
+
+  // Закрытие по крестику основного модального окна
+  if (closeButton) {
+    closeButton.addEventListener('click', closeModal);
+  }
+
+  // Закрытие по крестику мини модального окна
+  if (closeButtonMini) {
+    closeButtonMini.addEventListener('click', closeModal);
+  }
+
+  // Закрытие по клику вне основного модального окна
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', function(e) {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+  }
+
+  // Закрытие по клику вне мини модального окна
+  if (modalOverlayMini) {
+    modalOverlayMini.addEventListener('click', function(e) {
+      if (e.target === modalOverlayMini) {
+        closeModal();
+      }
+    });
+  }
+
+  // Закрытие по клавише Esc
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      // Проверяем, открыто ли какое-либо модальное окно
+      const isModalOpen = document.getElementById('successModal')?.style.display === 'flex' ||
+          document.getElementById('successModalMini')?.style.display === 'flex';
+
+      if (isModalOpen) {
+        closeModal();
+      }
+    }
+  });
+
+  // Обработчик изменения размера окна
+  window.addEventListener('resize', function() {
+    // Если при изменении размера окна модальное окно открыто,
+    // переключаем на правильную версию
+    const isModalOpen = document.getElementById('successModal')?.style.display === 'flex' ||
+        document.getElementById('successModalMini')?.style.display === 'flex';
+
+    if (isModalOpen) {
+      closeModal();
+      openModal();
     }
   });
 });
