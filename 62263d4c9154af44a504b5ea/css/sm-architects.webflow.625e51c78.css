@@ -1722,9 +1722,12 @@ figcaption {
   body {
     font-size: 20px;
   }
-.hero-wrapper {
-  max-height: 350px !important;
-}
+/*.hero-wrapper {*/
+/*  max-height: 350px !important;*/
+/*}*/
+  .hero-container {
+    padding-bottom: 220px;
+  }
   h1 {
     margin-bottom: 7px;
     font-size: 35px;
